@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Whiteweld Foundation</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png">
+    <link rel="manifest" href="media/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #141414 0%, #222 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            height: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        nav::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #DAB565, #FFC107, #FFD54F);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            height: 100%;
+        }
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, transparent, #FFC107);
+            transition: height 0.4s ease;
+        }
+        nav a:last-child {
+            border-right: none;
+        }
+        
+        /* Focus state for accessibility */
+        nav a:focus {
+            outline: 2px solid #FFC107;
+            outline-offset: -2px;
+        }
+        
+        /* Hover effects only on devices with hover capability */
+        @media (hover: hover) and (pointer: fine) {
+            nav a:hover::before {
+                height: 100%;
+            }
+            nav a:hover {
+                background: rgba(255, 193, 7, 0.2);
+                color: #DAB565;
+                transform: translateY(-2px);
+            }
+        }
+        
+        /* Touch feedback for mobile devices */
+        nav a:active {
+            background: rgba(255, 193, 7, 0.4);
+            color: #FFC107;
+            transform: scale(0.98);
+            transition: all 0.1s ease;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: visible;
+            background: black;
+            border: 12px solid black;
+        }
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 65%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+            -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+        }
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 4%;
+            transform: translateY(-50%);
+            max-width: 450px;
+            z-index: 2;
+            background: black;
+            padding: 20px 40px 20px 20px;
+        }
+        .mission-title {
+            font-size: 3.5rem;
+            color: white;
+            font-style: italic;
+            font-weight: normal;
+            margin-bottom: 15px;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+        }
+        .mission-text-content {
+            font-size: 1.1rem;
+            color: white;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+        .logo-section-hero {
+            position: absolute;
+            bottom: -65px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #FFC107;
+            transition: all 0.3s ease;
+        }
+        .logo-section-hero:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 193, 7, 0.4);
+        }
+        .logo-text-hero img {
+            width: 220px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+        }
+        
+        /* Left Content */
+        .content-left {
+            margin-top: 20px;
+            padding: 50px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-left p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #000000;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        /* Video Section */
+        .video-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .video-card {
+            background: #FFFFFF;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hover only on hover-capable devices */
+        @media (hover: hover) and (pointer: fine) {
+            .video-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            }
+        }
+        
+        .video-card video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            outline: none;
+            background: #000;
+        }
+        .video-caption {
+            color: #FFC107;
+            font-size: 20px;
+            font-style: italic;
+            margin-top: 15px;
+            line-height: 1.5;
+            font-weight: 500;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        /* Right Sidebar */
+        .sidebar {
+            background: #141414;
+        }
+        .sidebar-header {
+            background: linear-gradient(135deg, #FFC107, #FFD54F);
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+        .program-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+            margin: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid #FFC107;
+        }
+        .program-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        /* Hover only on hover-capable devices */
+        @media (hover: hover) and (pointer: fine) {
+            .program-card:hover {
+                transform: translateX(5px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+                border-left-color: #FFD54F;
+            }
+        }
+        
+        /* Touch feedback for all devices */
+        .program-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .program-header {
+            color: #FFC107;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .program-content {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+        .program-icon {
+            width: 70px;
+            height: 70px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .program-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .program-text p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+        .program-tagline {
+            color: #FFC107;
+            font-weight: bold;
+            font-size: 15px;
+            font-style: italic;
+        }
+        
+        /* Footer */
+        .footer-nav {
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .footer-nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .footer-nav a:hover {
+            color: #FFC107;
+            text-decoration: underline;
+        }
+        .footer-separator {
+            color: #666;
+            margin: 0 8px;
+            user-select: none;
+        }
+        .footer-credit {
+            background: #FFC107;
+            padding: 15px;
+            text-align: center;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .footer-credit a {
+            color: #000000;
+            text-decoration: underline;
+        }
+        
+        /* Tablet Breakpoint - 769px to 1024px */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .main-content {
+                grid-template-columns: 1.5fr 1fr;
+            }
+            .content-left {
+                padding: 40px 35px;
+            }
+            .content-left p {
+                font-size: 17px;
+            }
+            .logo-text-hero img {
+                width: 200px;
+            }
+        }
+        
+        /* Mobile and Small Tablet - 481px to 768px */
+        @media (max-width: 768px) {
+            /* Navigation adjustments */
+            nav {
+                height: auto;
+                min-height: 60px;
+                padding: 5px;
+            }
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+            nav a {
+                padding: 12px 15px;
+                font-size: 13px;
+                border-right: none;
+                border-radius: 5px;
+                flex: 0 1 auto;
+            }
+            nav a:focus {
+                outline-offset: 2px;
+            }
+            
+            /* Hero Section */
+            .hero-section {
+                height: 500px;
+                border: 8px solid black;
+                margin-bottom: 85px;
+            }
+            .hero-image {
+                width: 100%;
+                height: 60%;
+                top: 0;
+                mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+                -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+            }
+            .hero-content {
+                left: 50%;
+                top: 55%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                text-align: center;
+                max-width: 90%;
+                background: rgba(0, 0, 0, 0.85);
+            }
+            .mission-title {
+                font-size: 2.5rem;
+            }
+            .mission-text-content {
+                font-size: 1rem;
+            }
+            .logo-section-hero {
+                bottom: -65px;
+                border: 1px solid #FFC107;
+            }
+            .logo-section-hero:hover {
+                transform: translateX(-50%) scale(1.03);
+            }
+            .logo-text-hero img {
+                width: 170px;
+            }
+            
+            /* Main Content */
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .content-left {
+                padding: 40px 30px;
+            }
+            .content-left p {
+                font-size: 16px;
+            }
+            
+            /* Video Section */
+            .video-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 30px;
+            }
+            .video-caption {
+                font-size: 18px;
+                padding: 0 15px;
+            }
+            
+            /* Sidebar */
+            .program-card {
+                margin: 20px;
+                padding: 20px;
+            }
+            .program-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .program-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            /* Footer - hide separators on mobile */
+            .footer-nav {
+                padding: 20px 10px;
+            }
+            .footer-nav a {
+                display: inline-block;
+                margin: 8px 10px;
+                font-size: 13px;
+            }
+            .footer-separator {
+                display: none;
+            }
+        }
+        
+        /* Small Mobile - 480px and below */
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 11px;
+                padding: 10px 12px;
+                letter-spacing: 0.3px;
+            }
+            
+            .hero-section {
+                height: 450px;
+                margin-bottom: 85px;
+            }
+            .mission-title {
+                font-size: 2rem;
+            }
+            .mission-text-content {
+                font-size: 0.95rem;
+            }
+            .logo-section-hero {
+                bottom: -65px;
+            }
+            .logo-text-hero img {
+                width: 140px;
+            }
+            .content-left {
+                padding: 30px 20px;
+            }
+            .content-left p {
+                font-size: 15px;
+            }
+            .video-caption {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            .program-card {
+                margin: 15px;
+                padding: 15px;
+            }
+            .program-header {
+                font-size: 18px;
+            }
+            .footer-nav a {
+                font-size: 12px;
+                margin: 5px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="foundationprograms.html">Foundation Programs</a>
+                <a href="concertseries.html">Concert Series</a>
+                <a href="newsroom.html">Newsroom</a>
+                <a href="Qa.html">Q&A</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="media/photo-1503454537195-1dcabb73ffb9_result.webp" alt="Child running in sunny field" class="hero-image">
+            <div class="hero-content">
+                <h1 class="mission-title">Mission</h1>
+                <p class="mission-text-content">
+                    The Whiteweld Foundation's mission is to promote the health, education, and welfare of children in our communities throughout the United States and abroad.
+                </p>
+            </div>
+            <div class="logo-section-hero">
+                <div class="logo-text-hero"><img src="media/Untitled design (1)_result.webp" alt="Whiteweld Foundation Logo"></div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Content -->
+            <div class="content-left">
+                <p>Kids today are challenged with finding their way in a world that is more formidable than ever. By encouraging a sense of hope and self-expression in today's younger generation, we can all help to ensure a brighter social and economic future for all Americans. Civic and local community services, scholarships, and cultural arts programs are the primary means in which we are constantly seeking new charitable opportunities to uplift young people and guide them to greatness.</p>
+                <p>One example is The Whiteweld Foundation Concert Series, which enlists well-known entertainers to perform at the most notable concert halls in the country and by sharing their star power and legendary talents, raise awareness and precious funds for charitable organizations who support child health, education, and foster creativity in children of every age group.</p>
+                
+                <div class="video-section">
+                    <div class="video-card">
+                        <video width="100%" controls>
+                            <source src="media/hillary.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-card">
+                        <video width="100%" controls>
+                            <source src="media/brokaw.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    Hear about a recent concert at NYC's Avery Fisher Hall to benefit Project Kids?
+                </div>
+            </div>
+            
+            <!-- Right Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">OUR PROGRAMS</div>
+                
+                <div class="program-card">
+                    <a href="foundationprograms.html#Health">
+                        <div class="program-header">Health</div>
+                        <div class="program-content">
+                            <div class="program-icon">
+                                <img src="media/pexels-itfeelslikefilm-14755524_result.webp" alt="Health">
+                            </div>
+                            <div class="program-text">
+                                <p>We fund leading charities that provide health aid to millions of children around the globe in need of everything from immunization to nutritious meals.</p>
+                                <p class="program-tagline">Protecting Tomorrows Generation</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="program-card">
+                    <a href="foundationprograms.html#Education">
+                        <div class="program-header">Education</div>
+                        <div class="program-content">
+                            <div class="program-icon">
+                                <img src="media/pexels-katerina-holmes-5905918_result.webp" alt="Education">
+                            </div>
+                            <div class="program-text">
+                                <p>We support uplifting creative programming for children that nurtures self-expression and original thought.</p>
+                                <p class="program-tagline">Knowledge for Power</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="program-card">
+                    <a href="foundationprograms.html#Grassroots">
+                        <div class="program-header">Grassroots Assistance</div>
+                        <div class="program-content">
+                            <div class="program-icon">
+                                <img src="media/pexels-cottonbro-3171118_result.webp" alt="Grassroots">
+                            </div>
+                            <div class="program-text">
+                                <p>We're committed to local organizations assisting kids close to home.</p>
+                                <p class="program-tagline">Communities Working Together</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <a href="aboutus.html">About Us</a><span class="footer-separator">|</span>
+            <a href="foundationprograms.html">Foundation Programs</a><span class="footer-separator">|</span>
+            <a href="concertseries.html">Concert Series</a><span class="footer-separator">|</span>
+            <a href="newsroom.html">Newsroom</a><span class="footer-separator">|</span>
+            <a href="Qa.html">Q&A</a><span class="footer-separator">|</span>
+            <a href="contact.html">Contact Form</a>
+        </div>
+        
+        <!-- Footer Credit -->
+        <div class="footer-credit">
+            <p>© 2025 Whiteweld Foundation. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+</body>
+</html>

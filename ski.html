@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Whiteweld Foundation hosts a ski weekend at Windham Mountain to raise awareness for tsunami aid through its Concert Series benefiting children's charities.">
+    <meta name="keywords" content="Whiteweld Foundation, Windham Mountain, ski event, tsunami aid, concert series, charity, children">
+    <title>The Whiteweld Foundation Ski Event Raises Awareness for Tsunami Aid - The Whiteweld Foundation</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png">
+    <link rel="manifest" href="media/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #141414 0%, #222 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            height: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        nav::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #DAB565, #FFC107, #FFD54F);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            height: 100%;
+        }
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, transparent, #FFC107);
+            transition: height 0.4s ease;
+        }
+        nav a:last-child {
+            border-right: none;
+        }
+
+        /* Focus state for accessibility */
+        nav a:focus {
+            outline: 2px solid #FFC107;
+            outline-offset: -2px;
+        }
+
+        /* Hover effects only on devices with hover capability */
+        @media (hover: hover) and (pointer: fine) {
+            nav a:hover::before {
+                height: 100%;
+            }
+            nav a:hover {
+                background: rgba(255, 193, 7, 0.2);
+                color: #DAB565;
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Touch feedback for mobile devices */
+        nav a:active {
+            background: rgba(255, 193, 7, 0.4);
+            color: #FFC107;
+            transform: scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: black;
+            border: 12px solid #000000;
+            margin-bottom: 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Logo Top-Right Position */
+        .logo-section-hero {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            text-align: center;
+            z-index: 10;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #FFC107;
+            transition: all 0.3s ease;
+        }
+
+        .logo-section-hero:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 50px rgba(255, 193, 7, 0.4);
+        }
+
+        .logo-text-hero img {
+            width: 220px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Newsroom Layout */
+        .newsroom-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            align-items: center;
+            gap: 40px;
+            background: #FFFFFF;
+            padding: 50px 60px;
+        }
+
+        /* Left Column */
+        .newsroom-left {
+            background: #FFFFFF;
+        }
+
+        .newsroom-title {
+            color: #FFC107;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .news-article {
+            line-height: 1.7;
+            color: #000000;
+            font-size: 15px;
+        }
+
+        .news-headline {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .news-body {
+            margin-bottom: 25px;
+        }
+
+        .news-image {
+            max-width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #000000;
+            display: block;
+        }
+
+        .article-subtitle {
+            font-size: 1rem;
+            color: #FFC107;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Right Column */
+        .newsroom-right {
+            background: #f5f5f5;
+            padding: 25px;
+            border-left: 3px solid #FFFFFF;
+            align-self: center;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .news-links {
+            list-style: none;
+        }
+
+        .news-links li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .news-links li::before {
+            content: "◆";
+            color: #FFC107;
+            font-size: 10px;
+            position: absolute;
+            left: 0;
+            top: 4px;
+        }
+
+        .news-links a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 16px;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        .news-links a:hover {
+            color: #FFC107;
+            text-decoration: underline;
+        }
+
+        .news-footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #000000;
+            border-top: 1px solid #000000;
+            padding-top: 15px;
+        }
+
+        /* Footer */
+        .footer-nav {
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #FFC107;
+            text-decoration: underline;
+        }
+
+        .footer-separator {
+            color: #666;
+            margin: 0 8px;
+            user-select: none;
+        }
+
+        .footer-credit {
+            background: #FFC107;
+            padding: 15px;
+            text-align: center;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .footer-credit a {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        /* Tablet Breakpoint - 769px to 1024px */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .newsroom-content {
+                grid-template-columns: 1.5fr 1fr;
+            }
+            .logo-text-hero img {
+                width: 200px;
+            }
+        }
+
+        /* Mobile and Small Tablet - 481px to 768px */
+        @media (max-width: 768px) {
+            nav {
+                height: auto;
+                min-height: 60px;
+                padding: 5px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 12px 15px;
+                font-size: 13px;
+                border-right: none;
+                border-radius: 5px;
+                flex: 0 1 auto;
+            }
+
+            nav a:focus {
+                outline-offset: 2px;
+            }
+
+            .hero-section {
+                height: 400px;
+                border: 8px solid black;
+            }
+
+            .logo-section-hero {
+                top: 20px;
+                right: 20px;
+                border: 1px solid #FFC107;
+            }
+
+            .logo-section-hero:hover {
+                transform: translateY(-3px) scale(1.02);
+            }
+
+            .logo-text-hero img {
+                width: 170px;
+            }
+
+            .newsroom-content {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .newsroom-right {
+                border-left: none;
+                border-top: 3px solid #FFFFFF;
+                margin-top: 30px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .footer-nav {
+                padding: 20px 10px;
+            }
+            .footer-nav a {
+                display: inline-block;
+                margin: 8px 10px;
+                font-size: 13px;
+            }
+            .footer-separator {
+                display: none;
+            }
+        }
+
+        /* Small Mobile - 480px and below */
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 11px;
+                padding: 10px 12px;
+                letter-spacing: 0.3px;
+            }
+
+            .hero-section {
+                height: 350px;
+                border: 6px solid black;
+            }
+
+            .logo-section-hero {
+                top: 15px;
+                right: 15px;
+                border: 1px solid #FFC107;
+            }
+
+            .logo-text-hero img {
+                width: 140px;
+            }
+
+            .newsroom-content {
+                padding: 20px;
+            }
+
+            .newsroom-right {
+                padding: 20px;
+            }
+
+            .footer-nav a {
+                font-size: 12px;
+                margin: 5px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="foundationprograms.html">Foundation Programs</a>
+                <a href="concertseries.html">Concert Series</a>
+                <a href="newsroom.html" aria-current="page">Newsroom</a>
+                <a href="Qa.html">Q&A</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="media/Gemini_Generated_Image_updqpvupdqpvupdq_result.webp" 
+                 alt="Windham Mountain ski event by Whiteweld Foundation" 
+                 class="hero-image" loading="lazy">
+            
+            <div class="logo-section-hero">
+                <div class="logo-text-hero"><img src="media/Untitled design (1)_result.webp" alt="Whiteweld Foundation Logo" loading="lazy"></div>
+            </div>
+        </div>
+
+        <!-- Newsroom Content -->
+        <div class="newsroom-content">
+            <!-- Left Column -->
+            <div class="newsroom-left">
+                <h2 class="newsroom-title">Newsroom</h2>
+
+                <div class="news-article">
+                    <h3 class="news-headline">THE WHITEWELD FOUNDATION SKI EVENT RAISES AWARENESS FOR TSUNAMI AID</h3>
+
+                    <h4 class="article-subtitle">Whiteweld Foundation hosts ski weekend extravaganza at Windham Mountain</h4>
+
+                    <img src="media/skinews_image_result.webp" alt="Windham Mountain ski event party tent" class="news-image" loading="lazy">
+
+                    <div class="news-body">
+                        <p><strong>New York, NY, February 20, 2005—</strong>The Whiteweld Foundation, dedicated to promoting the health, education, and welfare of children throughout the United States and abroad, hosted a festive weekend at New York's Windham Mountain. The event was planned to build awareness for The Whiteweld Foundation Concert Series, which raises funds on behalf of children's charities.</p>
+
+                        <p>The Whiteweld "party tent" was set up near Windham's popular and active ski lifts, and all weekend long there was a live DJ pumping tunes, free popcorn and snack food, and raffle giveaways every hour. The public had many chances to win, and also learn more about the very successful, ongoing Concert Series that The Whiteweld Foundation sponsors. Earlier in February, Vanessa Williams took the stage at Carnegie Hall and Frankie Valli and the Four Seasons performed in Sparta, New Jersey, both benefiting the survivors of the Asian tsunami disaster.</p>
+
+                        <p>With brisk temperatures and plenty of snow, the skiers flocked to Windham and made Whiteweld's party atmosphere all the more festive. The Grand Prize, a set of skis from the European high-performance manufacturer Volkl, was won by Aaron Swedberg, a sixteen-year-old sophomore at Monsignor Donovan High School in Toms River, New Jersey. Many great ski runs are expected to follow.</p>
+
+                        <p>Linda E. Bovino and Linda A. Bovino, members of the Board of The Whiteweld Foundation, were on hand to award the prizes and act as official hosts.</p>
+
+                        <h4 class="article-subtitle">About The Whiteweld Foundation</h4>
+                        <p>The Whiteweld Foundation's mission is to promote the health, education, and welfare of children in our communities throughout the United States and abroad. Funds raised are distributed directly and through charitable organizations dedicated to protecting and nurturing children everywhere.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="newsroom-right">
+                <ul class="news-links">
+                    <li><a href="newsroom.html">The Whiteweld Foundation is a Prime Example of Altruism</a></li>
+                    <li><a href="news_warwick.html">The Whiteweld Foundation Presents Dionne Warwick in Concert at Avery Fisher Hall</a></li>
+                    <li><a href="newsfourtops.html">The Whiteweld Foundation Presents The Four Tops & The Temptations in Concert at Carnegie Hall</a></li>
+                    <li><a href="gladyknights.html">The Whiteweld Foundation Presents Gladys Knight in Concert at Carnegie Hall</a></li>
+                    <li><a href="pattieaustin.html">The Whiteweld Foundation presents Patti Austin and the Count Basie Orchestra at Carnegie Hall</a></li>
+                    <li><a href="ski.html">The Whiteweld Foundation ski event raises awareness for Tsunami Aid</a></li>
+                    <li><a href="nationwide.html">The Whiteweld Foundation formed to help children nationwide</a></li>
+                    <li><a href="vali.html">The Whiteweld Foundation Presents the Legendary Frankie Valli at McNiece Auditorium</a></li>
+                    <li><a href="chuck.html">The Whiteweld Foundation Concert Series presents Chuck Mangione and his thirty-piece orchestra, live at Lincoln Center</a></li>
+                    <li><a href="news_knight.html">The Whiteweld Foundation Concert Series presents Jazz greats—Nancy Wilson & The Count Basie Orchestra at Carnegie Hall</a></li>
+                    <li><a href="burst.html">The Whiteweld Foundation Concert Series presents legendary artist Burt Bacharach live at Lincoln Center</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <a href="aboutus.html">About Us</a><span class="footer-separator">|</span>
+            <a href="foundationprograms.html">Foundation Programs</a><span class="footer-separator">|</span>
+            <a href="concertseries.html">Concert Series</a><span class="footer-separator">|</span>
+            <a href="newsroom.html">Newsroom</a><span class="footer-separator">|</span>
+            <a href="Qa.html">Q&A</a><span class="footer-separator">|</span>
+            <a href="contact.html">Contact Form</a>
+        </div>
+
+        <!-- Footer Credit -->
+        <div class="footer-credit">
+            <p>© 2025 Whiteweld Foundation. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gladys Knight Gallery - The Whiteweld Foundation</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png">
+    <link rel="manifest" href="media/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #141414 0%, #222 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            height: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #DAB565, #FFC107, #FFD54F);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, transparent, #FFC107);
+            transition: height 0.4s ease;
+        }
+
+        nav a:last-child {
+            border-right: none;
+        }
+
+        /* Focus state for accessibility */
+        nav a:focus {
+            outline: 2px solid #FFC107;
+            outline-offset: -2px;
+        }
+
+        /* Hover effects only on devices with hover capability */
+        @media (hover: hover) and (pointer: fine) {
+            nav a:hover::before {
+                height: 100%;
+            }
+            nav a:hover {
+                background: rgba(255, 193, 7, 0.2);
+                color: #DAB565;
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Touch feedback for mobile devices */
+        nav a:active {
+            background: rgba(255, 193, 7, 0.4);
+            color: #FFC107;
+            transform: scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Hero Section - Matching Williams */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: black;
+            border: 12px solid black;
+            margin-bottom: 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Logo Top-Right Position - Matching Williams */
+        .logo-section-hero {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            text-align: center;
+            z-index: 10;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 100%);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #FFC107;
+            transition: all 0.3s ease;
+        }
+
+        .logo-section-hero:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 50px rgba(255, 193, 7, 0.4);
+        }
+
+        .logo-text-hero img {
+            width: 220px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Gallery Content */
+        .gallery-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            background: #FFFFFF;
+        }
+
+        /* Left Side - Main Image */
+        .gallery-left {
+            padding: 40px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+        }
+
+        .gallery-title {
+            color: #FFC107;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:hover {
+            background: #FFFFFF;
+            transform: scale(1.1);
+        }
+
+        .control-btn:focus {
+            outline: 2px solid #FFC107;
+            outline-offset: 2px;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFFFFF;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* Right Side - Thumbnails */
+        .gallery-right {
+            background: linear-gradient(135deg, #141414 0%, #222 100%);
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .gallery-header {
+            color: #FFC107;
+            font-size: 3rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #FFFFFF;
+        }
+
+        .thumbnail:focus {
+            outline: 2px solid #FFC107;
+            outline-offset: 2px;
+        }
+
+        .thumbnail.active {
+            border-color: #FFC107;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
+            background: rgba(255, 193, 7, 0.8);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background: #FFC107;
+            color: #000000;
+        }
+
+        .back-button:focus {
+            outline: 2px solid #FFFFFF;
+            outline-offset: 2px;
+        }
+
+        /* Footer */
+        .footer-nav {
+            background: linear-gradient(135deg, #f5f5f5 0%, #FFFFFF 100%);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #FFC107;
+            text-decoration: underline;
+        }
+
+        .footer-separator {
+            color: #666;
+            margin: 0 8px;
+            user-select: none;
+        }
+
+        .footer-credit {
+            background: #FFC107;
+            padding: 15px;
+            text-align: center;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .footer-credit a {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        /* Tablet Breakpoint - 769px to 1024px */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .gallery-content {
+                grid-template-columns: 1fr 300px;
+            }
+            .logo-text-hero img {
+                width: 200px;
+            }
+        }
+
+        /* Mobile and Small Tablet - 481px to 768px */
+        @media (max-width: 768px) {
+            /* Navigation adjustments */
+            nav {
+                height: auto;
+                min-height: 60px;
+                padding: 5px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 12px 15px;
+                font-size: 13px;
+                border-right: none;
+                border-radius: 5px;
+                flex: 0 1 auto;
+            }
+
+            nav a:focus {
+                outline-offset: 2px;
+            }
+
+            .hero-section {
+                height: 400px;
+                border: 8px solid black;
+                margin-bottom: 0;
+            }
+
+            .logo-section-hero {
+                top: 20px;
+                right: 20px;
+                border: 1px solid #FFC107;
+            }
+
+            .logo-section-hero:hover {
+                transform: translateY(-3px) scale(1.02);
+            }
+
+            .logo-text-hero img {
+                width: 170px;
+            }
+
+            .gallery-content {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-left {
+                padding: 30px 20px;
+            }
+
+            .gallery-title {
+                font-size: 1.75rem;
+            }
+
+            .thumbnail-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            /* Footer - hide separators on mobile */
+            .footer-nav {
+                padding: 20px 10px;
+            }
+            .footer-nav a {
+                display: inline-block;
+                margin: 8px 10px;
+                font-size: 13px;
+            }
+            .footer-separator {
+                display: none;
+            }
+        }
+
+        /* Small Mobile - 480px and below */
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 11px;
+                padding: 10px 12px;
+                letter-spacing: 0.3px;
+            }
+
+            .hero-section {
+                height: 350px;
+                border: 6px solid black;
+                margin-bottom: 0;
+            }
+
+            .logo-section-hero {
+                top: 15px;
+                right: 15px;
+                border: 1px solid #FFC107;
+            }
+
+            .logo-text-hero img {
+                width: 140px;
+            }
+
+            .gallery-left {
+                padding: 20px 15px;
+            }
+
+            .gallery-title {
+                font-size: 1.5rem;
+            }
+
+            .thumbnail-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .gallery-header {
+                font-size: 2.5rem;
+            }
+
+            .footer-nav a {
+                font-size: 12px;
+                margin: 5px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-container">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="foundationprograms.html">Foundation Programs</a>
+                <a href="concertseries.html">Concert Series</a>
+                <a href="newsroom.html">Newsroom</a>
+                <a href="Qa.html">Q&A</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="media/pexels-pixabay-164821_result.webp" 
+                 alt="Concert hall stage with lights" 
+                 class="hero-image">
+            
+            <div class="logo-section-hero">
+                <div class="logo-text-hero"><img src="media/Untitled design (1)_result.webp" alt="Whiteweld Foundation Logo"></div>
+            </div>
+        </div>
+
+        <!-- Gallery Content -->
+        <div class="gallery-content">
+            <!-- Left Side - Main Image -->
+            <div class="gallery-left">
+                <h1 class="gallery-title">Gladys Knight Gallery</h1>
+                
+                <div class="main-image-container">
+                    <img src="media/p_100_result.webp" 
+                         alt="Gallery Image 1" 
+                         class="main-image" 
+                         id="mainImage">
+                    
+                    <div class="slide-counter">
+                        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+                    </div>
+                    
+                    <div class="slideshow-controls">
+                        <button class="control-btn" onclick="prevSlide()" aria-label="Previous image">◄</button>
+                        <button class="control-btn" onclick="toggleAutoplay()" id="playBtn" aria-label="Pause slideshow">❚❚</button>
+                        <button class="control-btn" onclick="nextSlide()" aria-label="Next image">►</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Thumbnails -->
+            <div class="gallery-right">
+                <div class="gallery-header">Gallery</div>
+                
+                <div class="thumbnail-grid" id="thumbnailGrid">
+                    <!-- Thumbnails will be generated by JavaScript -->
+                </div>
+                
+                <a href="concertseries.html" class="back-button">BACK TO CONCERT SERIES</a>
+            </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="footer-nav">
+            <a href="aboutus.html">About Us</a><span class="footer-separator">|</span>
+            <a href="foundationprograms.html">Foundation Programs</a><span class="footer-separator">|</span>
+            <a href="concertseries.html">Concert Series</a><span class="footer-separator">|</span>
+            <a href="newsroom.html">Newsroom</a><span class="footer-separator">|</span>
+            <a href="Qa.html">Q&A</a><span class="footer-separator">|</span>
+            <a href="contact.html">Contact Form</a>
+        </div>
+
+        <!-- Footer Credit -->
+        <div class="footer-credit">
+            <p>© 2025 Whiteweld Foundation. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            'media/p_100_result.webp',
+            'media/p_101_result.webp',
+            'media/p_102_result.webp',
+            'media/p_103_result.webp',
+            'media/p_104_result.webp',
+            'media/p_105_result.webp',
+            'media/p_106_result.webp',
+            'media/p_107_result.webp',
+            'media/p_109_result.webp',
+            'media/p_111_result.webp'
+        ];
+
+        let currentIndex = 0;
+        let autoplayInterval = null;
+        let isPlaying = true;
+
+        function initGallery() {
+            const thumbnailGrid = document.getElementById('thumbnailGrid');
+            const totalSlides = document.getElementById('totalSlides');
+            
+            totalSlides.textContent = images.length;
+            
+            images.forEach((img, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = img;
+                thumb.alt = `Gallery image ${index + 1}`;
+                thumb.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                thumb.tabIndex = 0;
+                thumb.onclick = () => goToSlide(index);
+                thumb.onkeypress = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        goToSlide(index);
+                    }
+                };
+                thumbnailGrid.appendChild(thumb);
+            });
+            
+            startAutoplay();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateGallery();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateGallery();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const mainImage = document.getElementById('mainImage');
+            const currentSlide = document.getElementById('currentSlide');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            mainImage.src = images[currentIndex];
+            mainImage.alt = `Gallery image ${currentIndex + 1}`;
+            currentSlide.textContent = currentIndex + 1;
+            
+            thumbnails.forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 3000);
+            isPlaying = true;
+            const playBtn = document.getElementById('playBtn');
+            playBtn.textContent = '❚❚';
+            playBtn.setAttribute('aria-label', 'Pause slideshow');
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+            isPlaying = false;
+            const playBtn = document.getElementById('playBtn');
+            playBtn.textContent = '▶';
+            playBtn.setAttribute('aria-label', 'Play slideshow');
+        }
+
+        function toggleAutoplay() {
+            if (isPlaying) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        }
+
+        window.addEventListener('load', initGallery);
+    </script>
+</body>
+</html>
