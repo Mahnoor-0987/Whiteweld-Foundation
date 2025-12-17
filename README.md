@@ -28,20 +28,6 @@ This project uses **static HTML files** to represent the structure of the founda
 
 ---
 
-## 📁 File Structure Example
-
-/
-├── index.html
-├── aboutus.html
-├── contact.html
-├── foundationprograms.html
-├── news_knight.html
-├── kids.html
-├── ... other pages
-├── README.md
-
----
-
 ## ⭐ Open Source Contributions
 
 This repository is open to collaborators. If you want to add enhancements (like CSS styling or responsiveness), feel free to submit a **pull request**!  
